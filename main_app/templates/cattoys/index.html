@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>Cat Toy List</h1>
+  {% if user.is_authenticated %}  
+    <a href="/cattoys/create">Add a New Cat Toy</a>
+  {% endif %}
+  <hr />
+  {% for cattoy in cattoys %}
+      <div>
+          <a href="{% url 'cattoys_show' cattoy.id %}">
+              <div class="card-content">
+                  <span>{{ cattoy.name }}</span>
+                  <p>{{ cattoy.color }}</p>
+              </div>
+          </a>
+      </div>
+  {% endfor %}
+{% endblock %}

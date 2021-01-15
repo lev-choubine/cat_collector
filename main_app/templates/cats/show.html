@@ -1,4 +1,28 @@
-<h2> Name: {{ cat.name }}</h2>
-<p> Breed: {{ cat.breed }}</p>
-<p> Description: {{ cat.description }}</p>
-<p> Age: {{ cat.age }}</p>
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+
+
+
+
+<div class="card-body">
+    <h2 class="card-body"> Name: {{ cat.name }}</h2>
+    <p> Breed: {{ cat.breed }}</p>
+    <p> Description: {{ cat.description }}</p>
+    {% if cat.age > 0 %}
+           <p> Age: {{ cat.age }}</p>
+    {% else %}
+           <p> Age: Kitten</p>
+    {% endif %}
+    
+    
+    {%for cattoy in cat.cattoys.all %}
+        <p>{{ cattoy.name }}</p>
+    {% empty %}
+        <p>Cat has no toys </p>    
+    {% endfor %}
+   <a class="btn btn-primary" href="{% url 'cats_update' cat.id%}">Update Details</a>
+    <a class="btn btn-danger"href="{% url 'cats_delete' cat.id%}">Delete Cat</a>
+</div>
+{%endblock%}
